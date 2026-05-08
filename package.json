@@ -1,0 +1,14 @@
+{
+  "name": "rideflow",
+  "version": "1.0.0",
+  "description": "RideFlow Ride-Hailing Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mysql2": "^3.9.2"
+  }
+}

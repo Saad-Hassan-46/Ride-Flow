@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideFlow - Admin Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .stats-ribbon { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px; }
+        .ribbon-card { background: var(--bg-secondary); padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent-primary); }
+        .ribbon-title { font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: bold;}
+        .ribbon-value { font-size: 2.2rem; font-weight: 900; color: #fff; margin-top: 5px;}
+        
+        .tab-container { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;}
+        .tab-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .tab-btn.active { background: var(--accent-primary); color: #000; border-color: var(--accent-primary); }
+        
+        .tab-content { display: none; background: var(--bg-secondary); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);}
+        .tab-content.active { display: block; }
+        
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.95rem; }
+        .data-table th, .data-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        .data-table th { color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; }
+        .btn-sm { background: var(--accent-secondary); color: #fff; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar" style="display:flex; justify-content:space-between; align-items:center; padding: 20px 0; border-bottom: 1px solid #333; margin-bottom: 20px;">
+            <div class="brand-header" style="margin:0;">
+                <h1 style="font-size: 1.8rem;">Ride<span>Flow</span> <span style="font-size: 1rem; color: #aaa;">| Admin Command</span></h1>
+            </div>
+            <button id="logout-btn" class="btn btn-danger" style="width: auto; padding: 8px 15px;">Logout</button>
+        </nav>
+
+        <div class="stats-ribbon">
+            <div class="ribbon-card">
+                <div class="ribbon-title">Total Platform Revenue</div>
+                <div class="ribbon-value" id="metric-rev">Rs. 0</div>
+            </div>
+            <div class="ribbon-card">
+                <div class="ribbon-title">Total Completed Rides</div>
+                <div class="ribbon-value" id="metric-rides">0</div>
+            </div>
+            <div class="ribbon-card">
+                <div class="ribbon-title">Active Drivers (Online/Trip)</div>
+                <div class="ribbon-value" id="metric-drivers">0</div>
+            </div>
+        </div>
+
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="openTab('tab-revenue')">Revenue by City</button>
+            <button class="tab-btn" onclick="openTab('tab-financials')">Platform Financials</button>
+            <button class="tab-btn" onclick="openTab('tab-flagged')" style="border-color: var(--accent-secondary); color: var(--accent-secondary);">Flagged Drivers</button>
+        </div>
+
+        <div id="tab-revenue" class="tab-content active">
+            <h2>Revenue by City</h2>
+            <table class="data-table">
+                <thead><tr><th>City</th><th>Total Rides</th><th>Total Revenue</th></tr></thead>
+                <tbody id="table-revenue"></tbody>
+            </table>
+        </div>
+
+        <div id="tab-financials" class="tab-content">
+            <h2>Driver Commission Breakdown</h2>
+            <table class="data-table">
+                <thead><tr><th>Driver Name</th><th>Total Trips</th><th>Platform Commission (20%)</th><th>Net Driver Earnings (80%)</th></tr></thead>
+                <tbody id="table-financials"></tbody>
+            </table>
+        </div>
+
+        <div id="tab-flagged" class="tab-content">
+            <h2 style="color: var(--accent-secondary);">Flagged Drivers (Rating < 3.5)</h2>
+            <p style="color: var(--text-muted); margin-bottom: 15px;">These drivers require administrative review.</p>
+            <table class="data-table">
+                <thead><tr><th>Driver Name</th><th>License</th><th>Avg Rating</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody id="table-flagged"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
