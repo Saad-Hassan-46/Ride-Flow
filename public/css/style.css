@@ -1,0 +1,154 @@
+/* Custom properties for consistency across RideFlow */
+:root {
+    --bg-primary: #1A1A1A;      /* Charcoal base */
+    --bg-secondary: #262626;    /* Card and Input Container background */
+    --accent-primary: #00FF66;  /* Neon Green for booking actions & success status */
+    --accent-secondary: #FF3366;/* Crimson Red for destructive actions & suspended status */
+    --text-primary: #FFFFFF;    /* Crisp White */
+    --text-muted: #A0A0A0;      /* Darker text for metadata and labels */
+    --border-color: #333333;    /* Clean subtle borders */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container limits width on larger screens */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Authentication Page Wrapper */
+.auth-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.auth-card {
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: border-color 0.3s ease;
+}
+
+.auth-card:focus-within {
+    border-color: var(--accent-primary);
+}
+
+.brand-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.brand-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.brand-header h1 span {
+    color: var(--accent-primary);
+}
+
+.brand-header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.form-control {
+    width: 100%;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 12px 16px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: var(--accent-primary);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    width: 100%;
+    background-color: var(--accent-primary);
+    color: #000000;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.1s ease, filter 0.2s ease;
+}
+
+.btn:hover {
+    filter: brightness(1.1);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-danger {
+    background-color: var(--accent-secondary);
+    color: #ffffff;
+}
+
+/* Messages */
+.alert {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    display: none;
+    font-weight: 500;
+}
+
+.alert-danger {
+    background-color: rgba(255, 51, 102, 0.15);
+    border: 1px solid var(--accent-secondary);
+    color: var(--accent-secondary);
+}
