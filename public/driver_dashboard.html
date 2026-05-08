@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideFlow - Driver Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
+        .stat-card { background: var(--bg-secondary); padding: 20px; border-radius: 10px; text-align: center; border: 1px solid var(--border-color); }
+        .stat-value { font-size: 2rem; font-weight: bold; color: var(--accent-primary); margin-top: 10px; }
+        
+        /* The Massive Toggle Button */
+        #status-toggle { width: 100%; padding: 25px; font-size: 1.5rem; text-transform: uppercase; font-weight: 900; letter-spacing: 2px; border-radius: 12px; margin-bottom: 25px; cursor: pointer; transition: all 0.3s; }
+        .btn-offline { background: var(--bg-secondary); color: var(--text-muted); border: 2px solid var(--border-color); }
+        .btn-online { background: var(--accent-primary); color: #000; border: 2px solid var(--accent-primary); box-shadow: 0 0 20px rgba(0,255,102,0.3); }
+        .btn-ontrip { background: #00CCFF; color: #000; border: 2px solid #00CCFF; cursor: not-allowed; }
+
+        /* Incoming Request Card */
+        #request-card { display: none; background: rgba(0, 255, 102, 0.1); border: 2px solid var(--accent-primary); border-radius: 12px; padding: 25px; text-align: center; animation: pulse 2s infinite; margin-bottom: 20px;}
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(0, 255, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); } }
+
+        /* Active Trip Card */
+        #active-trip-card { display: none; background: var(--bg-secondary); border: 2px solid #00CCFF; border-radius: 12px; padding: 25px; margin-bottom: 20px; }
+        .action-btn-group { display: flex; gap: 10px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 800px;">
+        <nav class="navbar" style="display:flex; justify-content:space-between; align-items:center; padding: 20px 0; border-bottom: 1px solid #333; margin-bottom: 20px;">
+            <div class="brand-header" style="margin:0;">
+                <h1 style="font-size: 1.8rem;">Ride<span>Flow</span> <span style="font-size: 1rem; color: #aaa;">| Driver</span></h1>
+            </div>
+            <div>
+                <span id="user-greeting" style="margin-right: 15px; font-weight: bold;"></span>
+                <button id="logout-btn" class="btn btn-danger" style="width: auto; padding: 8px 15px;">Logout</button>
+            </div>
+        </nav>
+
+        <button id="status-toggle" class="btn-offline">🔴 OFFLINE</button>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <p style="color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase;">Earnings</p>
+                <div class="stat-value" id="stat-earnings">Rs. 0</div>
+            </div>
+            <div class="stat-card">
+                <p style="color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase;">Trips</p>
+                <div class="stat-value" id="stat-trips">0</div>
+            </div>
+            <div class="stat-card">
+                <p style="color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase;">Rating</p>
+                <div class="stat-value" id="stat-rating" style="color: #FFD700;">★ 0.0</div>
+            </div>
+        </div>
+
+        <div id="request-card">
+            <h2 style="color: var(--accent-primary); margin-bottom: 15px;">🚨 New Ride Request!</h2>
+            <h3 id="req-route" style="margin-bottom: 10px;">Pickup → Dropoff</h3>
+            <p style="color: var(--text-muted); margin-bottom: 20px;" id="req-details">10 km • 25 mins • Rs. 500</p>
+            <button id="btn-accept" class="btn" style="font-size: 1.2rem; padding: 15px;">ACCEPT RIDE</button>
+        </div>
+
+        <div id="active-trip-card">
+            <h2 style="color: #00CCFF; margin-bottom: 10px;">🚕 Active Trip</h2>
+            <p><strong>Status:</strong> <span id="trip-status" style="background: #333; padding: 4px 8px; border-radius:4px;"></span></p>
+            <p style="margin-top: 10px;"><strong>Route:</strong> <span id="trip-route"></span></p>
+            <p><strong>Fare:</strong> Rs. <span id="trip-fare"></span></p>
+
+            <div class="action-btn-group">
+                <button id="btn-enroute" class="btn" style="background: #FF9900; color:#000;">En Route</button>
+                <button id="btn-inprogress" class="btn" style="background: #00CCFF; color:#000;">Start Trip</button>
+                <button id="btn-completed" class="btn">Complete & Collect Cash</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/driver.js"></script>
+</body>
+</html>
